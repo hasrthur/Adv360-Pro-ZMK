@@ -234,6 +234,17 @@ def main():
 #include <dt-bindings/zmk/backlight.h>
 #include <dt-bindings/zmk/pointing.h>
 
+/ {{
+    /* MoErgo-only; Kinesis's ZMK has the x/y scalers but no scroll scaler. */
+    /omit-if-no-ref/ zip_scroll_scaler: zip_scroll_scaler {{
+        compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <2>;
+        type = <INPUT_EV_REL>;
+        codes = <INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
+        track-remainders;
+    }};
+}};
+
 {chr(10).join(input_listener(il) for il in d.get('inputListeners', []))}
 
 / {{
