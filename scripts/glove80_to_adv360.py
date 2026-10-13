@@ -2,9 +2,9 @@
 """Generate config/adv360.keymap from a Glove80 Layout Editor JSON export.
 
 Writes config/adv360.keymap, plus assets/layers.html and assets/layers.pdf (every layer drawn
-on the 360). The PDF needs chromium on PATH and is skipped without it.
+on the 360). The PDF is printed with chromium, which the nix shell below provides.
 
-Usage: python3 scripts/glove80_to_adv360.py glove80/layout.json
+Usage: nix shell nixpkgs#python3 nixpkgs#chromium -c python3 scripts/glove80_to_adv360.py glove80/layout.json
 """
 import json
 import os
