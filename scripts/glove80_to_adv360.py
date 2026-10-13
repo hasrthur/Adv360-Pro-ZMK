@@ -45,6 +45,7 @@ INNER = {
 # MoErgo built-ins that don't exist on the Adv360.
 REPLACE = {
     "&magic": "&mo 19",
+    "&reset": "&sys_reset",
 }
 DROP_MACROS = {"&mstr1_v1_TKZ", "&mstr2_v1_TKZ"}
 
