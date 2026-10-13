@@ -39,7 +39,7 @@ INNER = {
     "HRM_macOS": {6: "&kp C_PREV", 20: "&kp C_PP", 34: "&kp C_NEXT",
                   7: "&kp C_VOL_UP", 21: "&kp C_VOL_DN", 39: "&kp C_MUTE"},
     "Lower": {6: "&kp C_BRI_UP", 20: "&kp C_BRI_DN", 34: "&kp PAUSE_BREAK"},
-    "Magic": {7: "&bt BT_CLR", 21: "&bt BT_CLR_ALL"},
+    "Magic": {7: "&bt BT_CLR", 21: "&bt BT_CLR_ALL", 39: "&stp STP_BAT"},
 }
 
 # MoErgo built-ins that don't exist on the Adv360.
@@ -167,6 +167,18 @@ ROWS = [
 
 
 def layer(name, gl):
+    adv = layer_bindings(name, gl)
+    rows = "\n".join("            " + "  ".join(adv[a] for a in row) for row in ROWS)
+    return (
+        f"        layer_{ident(name)} {{\n"
+        f'            display-name = "{name}";\n'
+        f"            bindings = <\n{rows}\n            >;\n"
+        f"        }};"
+    )
+
+
+def layer_bindings(name, gl):
+    """Adv360 position -> binding string for one Glove80 layer."""
     adv = {}
     for g, a in POS.items():
         adv[a] = fmt(gl[g])
@@ -178,13 +190,7 @@ def layer(name, gl):
         for a in INNER_L + INNER_R:
             adv[a] = "&trans"
     assert len(adv) == ADV_KEYS, name
-    rows = "\n".join("            " + "  ".join(adv[a] for a in row) for row in ROWS)
-    return (
-        f"        layer_{ident(name)} {{\n"
-        f'            display-name = "{name}";\n'
-        f"            bindings = <\n{rows}\n            >;\n"
-        f"        }};"
-    )
+    return adv
 
 
 def input_listener(il):
@@ -238,6 +244,7 @@ def main():
 #include <dt-bindings/zmk/rgb.h>
 #include <dt-bindings/zmk/backlight.h>
 #include <dt-bindings/zmk/pointing.h>
+#include <dt-bindings/zmk/stp.h>
 
 / {{
     /* MoErgo-only; Kinesis's ZMK has the x/y scalers but no scroll scaler. */

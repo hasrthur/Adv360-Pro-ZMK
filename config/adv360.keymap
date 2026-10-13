@@ -11,6 +11,7 @@
 #include <dt-bindings/zmk/rgb.h>
 #include <dt-bindings/zmk/backlight.h>
 #include <dt-bindings/zmk/pointing.h>
+#include <dt-bindings/zmk/stp.h>
 
 / {
     /* MoErgo-only; Kinesis's ZMK has the x/y scalers but no scroll scaler. */
@@ -909,7 +910,7 @@
             bindings = <
             &to 0  &to 5  &to 1  &none  &none  &none  &none  &bt BT_CLR  &none  &none  &none  &none  &none  &none
             &none  &rgb_ug RGB_SPI  &rgb_ug RGB_SAI  &rgb_ug RGB_HUI  &rgb_ug RGB_BRI  &rgb_ug RGB_TOG  &none  &bt BT_CLR_ALL  &none  &none  &none  &none  &none  &none
-            &bootloader  &rgb_ug RGB_SPD  &rgb_ug RGB_SAD  &rgb_ug RGB_HUD  &rgb_ug RGB_BRD  &rgb_ug RGB_EFF  &none  &bt_2  &bt_3  &none  &none  &none  &none  &none  &none  &none  &none  &bootloader
+            &bootloader  &rgb_ug RGB_SPD  &rgb_ug RGB_SAD  &rgb_ug RGB_HUD  &rgb_ug RGB_BRD  &rgb_ug RGB_EFF  &none  &bt_2  &bt_3  &none  &none  &stp STP_BAT  &none  &none  &none  &none  &none  &bootloader
             &sys_reset  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &sys_reset
             &none  &none  &none  &none  &none  &bt_0  &bt_1  &out OUT_USB  &none  &none  &none  &none  &none  &none  &none  &none
             >;
