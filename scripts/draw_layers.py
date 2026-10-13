@@ -132,6 +132,10 @@ h2{margin:32px 0 8px}nav a{color:#89b4fa;margin-right:10px}
 .hrm{background:#45475a}.lt{background:#1e3a5f}.layer{background:#3b2f5c}
 .roll{background:#2d3b35}.mouse{background:#2f3d4f}.sys{background:#5c2f3b}
 .legend span{display:inline-block;padding:2px 8px;border-radius:4px;margin-right:6px}
+section{break-inside:avoid}
+@page{size:A4 landscape;margin:0}
+@media print{html{-webkit-print-color-adjust:exact;print-color-adjust:exact;background:#1e1e2e}
+  body{margin:0;padding:10mm 12mm}nav{display:none}h1{font-size:20px}section{break-before:page}section:first-of-type{break-before:auto}}
 """
 
 
@@ -148,6 +152,6 @@ def render(d):
     parts.append("</nav>")
     for i, (name, gl) in enumerate(zip(names, d["layers"])):
         adv = g.layer_bindings(name, gl)
-        parts.append(f'<h2 id="l{i}">{i} · {html.escape(name)}</h2><div class="board">')
-        parts.append(half(left_cells(), adv, names) + half(right_cells(), adv, names) + "</div>")
+        parts.append(f'<section><h2 id="l{i}">{i} · {html.escape(name)}</h2><div class="board">')
+        parts.append(half(left_cells(), adv, names) + half(right_cells(), adv, names) + "</div></section>")
     return "\n".join(parts) + "\n"

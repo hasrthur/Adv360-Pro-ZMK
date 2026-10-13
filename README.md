@@ -12,7 +12,7 @@
    nix shell nixpkgs#python3 -c python3 scripts/glove80_to_adv360.py glove80/layout.json
    ```
 
-   This writes `config/adv360.keymap` and `glove80/layers.html`. Open the HTML file in a browser to see every layer drawn on the 360's layout.
+   This writes `config/adv360.keymap`, plus [`assets/layers.html`](assets/layers.html) and [`assets/layers.pdf`](assets/layers.pdf): every layer drawn on the 360's layout. The PDF needs `chromium` on `PATH`.
 4. Commit and push. GitHub Actions builds the firmware. Flash the files from the `firmware-no-clique` artifact. The Clique build can keep a layout saved through Clique instead of this one.
 
 How the port works (see `scripts/glove80_to_adv360.py`):

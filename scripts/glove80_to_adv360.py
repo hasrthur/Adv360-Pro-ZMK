@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 """Generate config/adv360.keymap from a Glove80 Layout Editor JSON export.
 
-Writes config/adv360.keymap, plus layers.html (a drawing of every layer) next to the export.
+Writes config/adv360.keymap, plus assets/layers.html and assets/layers.pdf (every layer drawn
+on the 360). The PDF needs chromium on PATH and is skipped without it.
 
 Usage: python3 scripts/glove80_to_adv360.py glove80/layout.json
 """
 import json
 import os
 import re
+import shutil
+import subprocess
 import sys
 
 ADV_KEYS = 76
@@ -295,8 +298,18 @@ def main():
         out.write(keymap)
 
     import draw_layers  # imports this module, so only at call time
-    with open(os.path.join(os.path.dirname(os.path.abspath(sys.argv[1])), "layers.html"), "w") as out:
+    html_path = os.path.join(root, "assets", "layers.html")
+    with open(html_path, "w") as out:
         out.write(draw_layers.render(d))
+
+    chromium = shutil.which("chromium") or shutil.which("google-chrome-stable")
+    if not chromium:
+        sys.exit("chromium not found: assets/layers.pdf not updated")
+    subprocess.run(
+        [chromium, "--headless", "--disable-gpu", "--no-pdf-header-footer",
+         f"--print-to-pdf={os.path.join(root, 'assets', 'layers.pdf')}", f"file://{html_path}"],
+        check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+    )
 
 
 if __name__ == "__main__":
