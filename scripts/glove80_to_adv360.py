@@ -48,7 +48,7 @@ REPLACE = {
     "&reset": "&sys_reset",
 }
 DROP_MACROS = {"&mstr1_v1_TKZ", "&mstr2_v1_TKZ"}
-
+HOLD_TAPS = set()  # filled from the export in main()
 
 
 def fmt_param(p):
@@ -68,7 +68,10 @@ def fmt(b):
         return "&none"
     if v in REPLACE:
         return REPLACE[v]
-    return " ".join([v] + [fmt_param(p) for p in b.get("params", [])])
+    params = [fmt_param(p) for p in b.get("params", [])]
+    if v in HOLD_TAPS:  # hold-taps always take two cells; the editor omits unused ones
+        params += ["0"] * (2 - len(params))
+    return " ".join([v] + params)
 
 
 def ident(name):
@@ -200,6 +203,7 @@ def input_listener(il):
 
 def main():
     d = json.load(open(sys.argv[1]))
+    HOLD_TAPS.update(h["name"] for h in d["holdTaps"])
     if d.get("custom_defined_behaviors") or d.get("custom_devicetree"):
         sys.exit("custom devicetree in export is not handled")
 

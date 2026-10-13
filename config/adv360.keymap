@@ -719,7 +719,7 @@
             bindings = <
             &kp EQUAL  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp C_PREV  &kp C_VOL_UP  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp MINUS
             &kp ESC  &kp Q  &kp W  &kp E  &kp R  &kp T  &kp C_PP  &kp C_VOL_DN  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp EQUAL
-            &kp TAB  &HRM_left_pinky_v1B_TKZ LCTRL A  &HRM_left_ring_v1B_TKZ LALT S  &HRM_left_middy_v1B_TKZ LGUI D  &HRM_left_index_v1B_TKZ LSHFT F  &kp G  &kp C_NEXT  &CAPSWord_v1_TKZ LSHFT  &kp LGUI  &kp RGUI  &CAPSWord_v1_TKZ RSHFT  &kp C_MUTE  &kp H  &HRM_right_index_v1B_TKZ LSHFT J  &HRM_right_middy_v1B_TKZ LGUI K  &HRM_right_ring_v1B_TKZ LALT L  &HRM_right_pinky_v1B_TKZ LCTRL SEMI  &kp SQT
+            &kp TAB  &HRM_left_pinky_v1B_TKZ LCTRL A  &HRM_left_ring_v1B_TKZ LALT S  &HRM_left_middy_v1B_TKZ LGUI D  &HRM_left_index_v1B_TKZ LSHFT F  &kp G  &kp C_NEXT  &CAPSWord_v1_TKZ LSHFT 0  &kp LGUI  &kp RGUI  &CAPSWord_v1_TKZ RSHFT 0  &kp C_MUTE  &kp H  &HRM_right_index_v1B_TKZ LSHFT J  &HRM_right_middy_v1B_TKZ LGUI K  &HRM_right_ring_v1B_TKZ LALT L  &HRM_right_pinky_v1B_TKZ LCTRL SEMI  &kp SQT
             &kp BSLH  &kp Z  &kp X  &kp C  &kp V  &kp B  &lower  &kp LCTRL  &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp MINUS
             &mo 19  &kp HOME  &kp END  &kp LEFT  &kp RIGHT  &thumb_v2_TKZ 2 RET  &thumb_v2_TKZ 3 SPACE  &kp TAB  &kp ESC  &thumb_v2_TKZ 15 BSPC  &space_v3_TKZ 4 DEL  &kp UP  &kp DOWN  &kp LBKT  &kp RBKT  &kp GRAVE
             >;
