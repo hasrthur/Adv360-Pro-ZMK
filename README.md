@@ -26,7 +26,7 @@ How the port works (see `scripts/glove80_to_adv360.py`):
   * The Bluetooth profile keys select that profile and switch output to Bluetooth.
   * Reset becomes ZMK's standard reset key.
 * **Magic layer** (hold the bottom-left key):
-  * Bluetooth profiles 0–3 and USB are on the left thumb cluster.
+  * Bluetooth profiles 0–4 and USB are on the left thumb cluster.
   * Bluetooth clear and clear-all are on the right inner column.
   * The battery indicator is the key left of H.
   * Bootloader is on the outer home-row keys, and reset on the outer keys below them.

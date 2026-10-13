@@ -45,6 +45,11 @@ INNER = {
     "Magic": {7: "&bt BT_CLR", 21: "&bt BT_CLR_ALL", 39: "&stp STP_BAT"},
 }
 
+# Adv360-only additions on keys the Glove80 layout leaves empty, per layer name.
+EXTRA = {
+    "Magic": {52: "&bt_4"},  # Glove80 has 4 BT profiles, the Adv360 has 5
+}
+
 # MoErgo built-ins that don't exist on the Adv360.
 REPLACE = {
     "&magic": "&mo 19",
@@ -192,6 +197,7 @@ def layer_bindings(name, gl):
     if name in {"Typing"} or re.match(r"(Left|Right)(Index|Middy|Ringy|Pinky)$", name):
         for a in INNER_L + INNER_R:
             adv[a] = "&trans"
+    adv.update(EXTRA.get(name, {}))
     assert len(adv) == ADV_KEYS, name
     return adv
 
@@ -222,7 +228,7 @@ def main():
             #binding-cells = <0>;
             bindings = <&out OUT_BLE>, <&bt BT_SEL {i}>;
         }};"""
-        for i in range(4)
+        for i in range(5)
     )
     lower = """        lower: lower {
             compatible = "zmk,behavior-tap-dance";
