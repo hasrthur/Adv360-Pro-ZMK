@@ -1,16 +1,9 @@
 #!/usr/bin/env python3
-"""Render every layer of the ported layout as an HTML page.
-
-Usage: python3 scripts/draw_layers.py glove80/layout.json > glove80/layers.html
-"""
+"""Render every layer of the ported layout as an HTML page. Called by glove80_to_adv360.py."""
 import html
-import json
-import os
 import re
-import sys
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import glove80_to_adv360 as g  # noqa: E402
+import glove80_to_adv360 as g
 
 KEYS = {
     **{f"N{i}": str(i) for i in range(10)},
@@ -142,8 +135,7 @@ h2{margin:32px 0 8px}nav a{color:#89b4fa;margin-right:10px}
 """
 
 
-def main():
-    d = json.load(open(sys.argv[1]))
+def render(d):
     g.HOLD_TAPS.update(h["name"] for h in d["holdTaps"])
     names = d["layer_names"]
     parts = [f"<!doctype html><meta charset=utf-8><title>Adv360 layers</title><style>{CSS}</style>",
@@ -158,8 +150,4 @@ def main():
         adv = g.layer_bindings(name, gl)
         parts.append(f'<h2 id="l{i}">{i} · {html.escape(name)}</h2><div class="board">')
         parts.append(half(left_cells(), adv, names) + half(right_cells(), adv, names) + "</div>")
-    print("\n".join(parts))
-
-
-if __name__ == "__main__":
-    main()
+    return "\n".join(parts) + "\n"

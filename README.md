@@ -1,5 +1,36 @@
 # Kinesis Advantage 360 Pro ZMK Config
 
+## This fork: TailorKey ported from Glove80
+
+`config/adv360.keymap` is generated from a Glove80 Layout Editor export (TailorKey macOS Bilateral). Don't edit it by hand. Change the layout on the Glove80 side, or change the script, and regenerate.
+
+1. On https://my.glove80.com, open Settings, enable "Local Backup and Restore", and export the layout JSON.
+2. Save it as `glove80/layout.json`. The `glove80/` directory is gitignored, so the export stays private.
+3. Regenerate:
+
+   ```sh
+   nix shell nixpkgs#python3 -c python3 scripts/glove80_to_adv360.py glove80/layout.json
+   ```
+
+   This writes `config/adv360.keymap` and `glove80/layers.html`. Open the HTML file in a browser to see every layer drawn on the 360's layout.
+4. Commit and push. GitHub Actions builds the firmware. Flash the files from the `firmware-no-clique` artifact. The Clique build can keep a layout saved through Clique instead of this one.
+
+How the port works (see `scripts/glove80_to_adv360.py`):
+
+* **Keys:** every key is mapped by position from the Glove80 to the 360. The home-row-mod settings, combos and the lists of opposite-hand keys are renumbered to match.
+* **Thumbs:** each Glove80 lower thumb arc becomes the 360's bottom three thumb keys (two big, one small). Each upper arc becomes the top pair plus the small key below it.
+* **Glove80 top row:** the 360 has no such row, so its media keys go on the 6 inner-column keys (`INNER` in the script). F-keys are on the Fn layer.
+* **Glove80-only keys:**
+  * Magic becomes a plain hold for the Magic layer.
+  * Lower holds the Lower layer, and a double tap locks it.
+  * The Bluetooth profile keys select that profile and switch output to Bluetooth.
+  * Reset becomes ZMK's standard reset key.
+* **Magic layer** (hold the bottom-left key):
+  * Bluetooth profiles 0–3 and USB are on the left thumb cluster.
+  * Bluetooth clear and clear-all are on the right inner column.
+  * The battery indicator is the key left of H.
+  * Bootloader is on the outer home-row keys, and reset on the outer keys below them.
+
 ## Modifying the keymap
 
 [The ZMK documentation](https://zmk.dev/docs) covers both basic and advanced functionality and has a table of OS compatibility for keycodes. Please note that the RGB Underglow, Backlight and Power Management sections are not relevant to the Advantage 360 Pro's custom ZMK fork. For more information see [this note](#note)
